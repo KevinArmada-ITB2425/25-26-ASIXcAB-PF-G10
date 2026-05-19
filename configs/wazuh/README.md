@@ -14,10 +14,11 @@ Configuración e instalación del servidor Wazuh y sus agentes.
 | Componente | Host | IP |
 |------------|------|----|
 | Wazuh Manager + Indexer + Dashboard | `wazuh-server` | `192.168.10.10` |
-| Wazuh Agent 1 | `client-user1` | `192.168.20.101` |
-| Wazuh Agent 2 | `client-user2` | `192.168.20.100` |
-| Wazuh Agent 3 | `dmz-host1` | `192.168.30.10` |
-| Wazuh Agent 4 | `dmz-host2` | `192.168.30.20` |
+| 001 | `client-user1` | `192.168.20.101` |
+| 002 | `client-user2` | `192.168.20.100` |
+| 003 | `dmz-host1` | `192.168.30.10` |
+| 004 | `dmz-host2` | `192.168.30.20` |
+| 005 | `admin-server` | `192.168.10.20` |
 
 ## Funcionalidades activas
 
