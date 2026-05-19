@@ -62,7 +62,7 @@ Password: (generada durante la instalación, guardar el output)
 ### En cada endpoint (client-user1, client-user2, dmz-host1, dmz-host2):
 
 
-![Comando wazuh-agents](comando_wazuh-agent_clientes.png)
+![Comando wazuh-agents](./dashboard-screenshots/comando_wazuh-agent_clientes.png)
 
 ```bash
 # Habilitar e iniciar el agente
