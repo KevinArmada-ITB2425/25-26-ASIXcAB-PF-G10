@@ -6,7 +6,7 @@ Configuración e instalación del servidor Wazuh y sus agentes.
 
 | Archivo / Carpeta | Descripción |
 |-------------------|-------------|
-| `config.md` | Guía paso a paso de instalación del Wazuh Manager, Indexer y Dashboard |
+| `config.md` | Guía paso a paso de instalación del Wazuh Manager, Indexer, Dashboard y Configuración Implementada |
 | `dashboard-screenshots/` | Capturas de pantalla del dashboard SOC con alertas reales |
 
 ## Infraestructura Wazuh
