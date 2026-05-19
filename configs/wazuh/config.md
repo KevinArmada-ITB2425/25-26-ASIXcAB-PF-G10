@@ -78,6 +78,8 @@ systemctl start wazuh-agent
 # En el servidor, comprobar agentes conectados
 /var/ossec/bin/agent_control -l
 
+![Verificacion de agentes](./dashboard-screenshots/comprobacion_agentes-activos.png)
+
 # Ver logs en tiempo real
 tail -f /var/ossec/logs/ossec.log
 ```
