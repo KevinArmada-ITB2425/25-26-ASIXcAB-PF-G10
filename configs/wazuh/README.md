@@ -31,28 +31,36 @@ Configuración e instalación del servidor Wazuh y sus agentes.
 
 ## 🛠️ Automatización y Monitoreo (Scripts)
 
-Para garantizar la alta disponibilidad de la infraestructura del SOC, se ha implementado un sistema de autorecuperación automatizado.
+Para garantizar la alta disponibilidad de la infraestructura del SOC y mantener un control estricto sobre los endpoints, se han implementado scripts automatizados en Bash dentro de la ruta del usuario: `/home/isard/scripts/.`
 
-### Script de Health Check (wazuh-healthcheck.sh)
-Ubicado en la ruta del usuario: `/home/isard/scripts/wazuh-healthcheck.sh.` 
+### 1. Script de Health Check (wazuh-healthcheck.sh)
+Monitoriza de forma persistente los tres servicios esenciales del servidor central para mitigar caídas imprevistas.
+**Servicios evaluados:** `wazuh-manager`, `wazuh-indexer` y `wazuh-dashboard.`
+**Detección inteligente:** Comprueba el estado de cada servicio mediante `systemctl.`
+**Autorecuperación:** Si detecta un servicio caído, realiza hasta **5 intentos de reinicio** automáticos asistidos por intervalos de espera de 10 segundos.
+**Auditoría:** Registra cada evento con marcas de tiempo en su log dedicado: `/home/isard/Escritorio/logs/wazuh-healthcheck.log.`
 
-Este script en Bash monitoriza de forma persistente los tres servicios esenciales del servidor:
-1. `wazuh-manager`
-2. `wazuh-indexer`
-3. `wazuh-dashboard`
+### 2. Script de Estado de Agentes (wazuh-agents-status.sh)
+Interroga de forma programada a la utilidad nativa `agent_control` de Wazuh para mapear, formatear y auditar el estado del parque de agentes en la red.
+**Métricas cuantitativas:** Clasifica y cuenta los agentes según su estado operativo (Activo, Desconectado, Pendiente o Nunca conectado), discriminando automáticamente al propio manager (ID `000`).
 
-**Características principales:**
-**Detección inteligente:** Comprueba el estado de cada servicio mediante systemctl.
-**Autorecuperación:** Si detecta un servicio caído, realiza hasta **5 intentos de reinicio** con intervalos de espera de 10 segundos.
-**Auditoría y Logs:** Registra con marcas de tiempo detalladas cada evento (estados OK, alertas de caída, intentos de recuperación y fallos críticos) en un archivo de log dedicado: `/home/isard/Escritorio/logs/wazuh-healthcheck.log.`
+**Alertas operativas:** Si detecta sistemas caídos, imprime una alerta visual en consola indicando los comandos inmediatos de diagnóstico y reinicio del servicio para el administrador.
+**Auditoría diferenciada:** Almacena un resumen resumido por hora en un archivo de log aislado: `/home/isard/Escritorio/logs/wazuh-agents-status.log.`
+
+---
 
 ### Implementación en tareas programadas (Cron)
-El script se ejecuta de forma automática en segundo plano cada **5 minutos** con privilegios de root. 
+Ambos procesos se ejecutan en segundo plano con privilegios de `root` para interactuar correctamente con los servicios del sistema y las herramientas de Wazuh.
 
-Para replicar la configuración en el sistema:
+Para replicar la configuración en el entorno:
 
-Abriremos el archivo de configuración global:
-`sudo nano /etc/crontab`
+1. Abrir el archivo de configuración global de tareas del sistema:
+   
+```bash
+sudo nano /etc/crontab
 
-Y al final del todo añadiremos la siguiente linea:
-`*/5 * * * * root bash /home/isard/scripts/wazuh-healthcheck.sh > /dev/null 2>&1`
+# Monitoreo de salud de servicios Wazuh cada 5 minutos
+*/5 * * * * root bash /home/isard/scripts/wazuh-healthcheck.sh > /dev/null 2>&1
+
+# Reporte estadístico del estado de los agentes cada hora en punto
+0 * * * * root bash /home/isard/scripts/wazuh-agents-status.sh > /dev/null 2>&1
