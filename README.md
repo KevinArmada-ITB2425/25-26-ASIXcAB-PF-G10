@@ -113,7 +113,7 @@ Servidor **Wazuh** en la subred de Gestió. Agentes en todos los endpoints detec
   └────────────────────┘  └────────────────────┘  └──────────────────┘
 ```
 
-> 💡 La topología fue diseñada y validada en **Cisco Packet Tracer** antes de su implementación.
+> 💡 La topología fue diseñada y validada en **Cisco Packet Tracer** antes de su implementación.  
 > 📂 Diagrama visual disponible en [`diagrams/`](diagrams/)
 
 ---
@@ -167,12 +167,12 @@ Aunque pfSense o OPNsense serían opciones válidas, elegimos **Ubuntu Server** 
 
 ## 📋 Sprints & Weekly Logs
 
-| Sprint | Semanas | Objetivo principal | Log |
-|--------|---------|-------------------|-----|
-| **Sprint 1** | S1 – S2 | Hipervisor, creación de VMs, diseño de red, diagrama de topología | [📄 S1 Weekly Log](weekly-logs/S1-weekly-log.md) |
-| **Sprint 2** | S3 – S4 | Router Ubuntu, subnetting, DHCP, DNS (Technitium), Suricata IDS/IPS | [📄 S2 Weekly Log](weekly-logs/S2-weekly-log.md) |
-| **Sprint 3** | S5 – S6 | Wazuh Server + instalación de agentes en todos los endpoints | 🔜 En progreso |
-| **Sprint 4** | S7 – S8 | WireGuard VPN, hardening de todos los sistemas, pruebas finales | 🔜 Pendiente |
+| Sprint | Semanas | Objetivo principal | Estado |
+|--------|---------|-------------------|--------|
+| **Sprint 1** | S1 – S2 | Hipervisor, creación de VMs, diseño de red, diagrama de topología | ✅ Completado |
+| **Sprint 2** | S3 – S4 | Router Ubuntu, subnetting, DHCP, DNS (Technitium), Suricata IDS/IPS | ✅ Completado |
+| **Sprint 3** | S5 – S6 | Wazuh Server + agentes en todos los endpoints + scripts de monitorización | ✅ Completado |
+| **Sprint 4** | S7 – S8 | WireGuard VPN, hardening de todos los sistemas, pruebas finales | 🔜 En progreso |
 
 > 📌 Gestión de tareas: **ProofHub** · Control de versiones: **este repositorio**
 
@@ -181,41 +181,29 @@ Aunque pfSense o OPNsense serían opciones válidas, elegimos **Ubuntu Server** 
 ## 📁 Estructura del Repositorio
 
 ```
-25-26-ASIXcBC-PF-G5/
+configs/
+├── wazuh/
+│   ├── README.md                   ← overview, tabla de agentes, funcionalidades
+│   ├── config.md                   ← instalación paso a paso (all-in-one + agentes)
+│   └── dashboard-screenshots/      ← evidencias visuales del SOC funcionando
 │
-├── 📂 configs/                         # Configuraciones por servicio
-│   ├── ubuntu-router/
-│   │   ├── config.md                   # Guía de configuración del router
-│   │   ├── nftables.conf               # Reglas de firewall
-│   │   ├── suricata/                   # Config Suricata + reglas custom
-│   │   ├── wireguard/                  # Config WireGuard server
-│   │   └── backups-automatizacion/     # Scripts de backup y automatización
-│   │       ├── configs/
-│   │       └── scripts/
-│   ├── wazuh/
-│   │   ├── config.md                   # Guía de instalación Wazuh
-│   │   └── dashboard-screenshots/      # Capturas del dashboard SOC
-│   ├── dmz/
-│   │   ├── Documentacio dmz-host1.md
-│   │   └── Documentacio dmz-host2.md
-│   └── README.md
+├── ubuntu-router/
+│   ├── README.md                   ← rol en la arquitectura, servicios activos
+│   ├── config.md                   ← netplan, IP forwarding, DHCP, DNS, verificación
+│   ├── nftables.conf               ← reglas completas (deny-all + excepciones reales)
+│   ├── suricata/
+│   │   └── README.md               ← instalación, config, integración con Wazuh
+│   └── wireguard/
+│       └── README.md               ← server + cliente + verificación
 │
-├── 📂 diagrams/                        # Diagramas de red
-│   └── diagrama_finalissima.webp
+├── dmz/
+│   ├── README.md                   ← hosts, política de seguridad
+│   ├── Documentacio dmz-host1.md
+│   └── Documentacio dmz-host2.md
 │
-├── 📂 docs/                            # Documentación técnica del proyecto
-│   ├── diseno-red.md                   # Diseño y justificación de la red
-│   ├── hardening.md                    # Medidas de bastionado aplicadas
-│   ├── justificacion-tecnica.md        # Justificación del stack elegido
-│   ├── plan-proyecto.md                # Planificación y sprints
-│   └── pruebas.md                      # Plan de pruebas y resultados
-│
-├── 📂 weekly-logs/                     # Diarios de trabajo semanales
-│   ├── S1-weekly-log.md
-│   └── S2-weekly-log.md
-│
-├── .gitignore
-└── README.md
+scripts/
+├── wazuh-healthcheck.sh            ← autorecuperación de servicios Wazuh (cron cada 5 min)
+└── wazuh-agents-status.sh          ← reporte del estado de agentes (cron cada hora)
 ```
 
 ---
@@ -242,11 +230,12 @@ SO del host:     Linux / Windows 10+
 # 4️⃣  Instalar y configurar Suricata en el router
 # 5️⃣  Instalar Wazuh Manager + Indexer + Dashboard en wazuh-server
 # 6️⃣  Desplegar agentes Wazuh en los 4 endpoints
-# 7️⃣  Configurar WireGuard VPN en admin-server
-# 8️⃣  Ejecutar pruebas de penetración y verificar alertas en el SOC
+# 7️⃣  Activar scripts de monitorización y configurar crontab
+# 8️⃣  Configurar WireGuard VPN en admin-server
+# 9️⃣  Ejecutar pruebas de penetración y verificar alertas en el SOC
 ```
 
-Consulta la carpeta [`configs/`](configs/) para los archivos de configuración de cada servicio.
+Consulta la carpeta [`configs/`](configs/) para los archivos de configuración de cada servicio y [`scripts/`](scripts/) para las herramientas de automatización y monitorización.
 
 ---
 
