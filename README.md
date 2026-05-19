@@ -210,7 +210,7 @@ scripts/
 
 ## 🚀 Cómo Empezar
 
-> La guía completa paso a paso está en [`docs/plan-proyecto.md`](docs/plan-proyecto.md)
+> La guía completa paso a paso está en [ configs/wazuh/config.md ](configs/wazuh/config.md)
 
 ### Requisitos del host
 
