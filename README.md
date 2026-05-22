@@ -178,32 +178,35 @@ Aunque pfSense o OPNsense serían opciones válidas, elegimos **Ubuntu Server** 
 
 ---
 
-## 📁 Estructura del Repositorio
-
+## 🗂️ Estructura
+ 
 ```
 configs/
-├── wazuh/
-│   ├── README.md                   ← overview, tabla de agentes, funcionalidades
-│   ├── config.md                   ← instalación paso a paso (all-in-one + agentes)
-│   └── dashboard-screenshots/      ← evidencias visuales del SOC funcionando
-│
 ├── ubuntu-router/
-│   ├── README.md                   ← rol en la arquitectura, servicios activos
-│   ├── config.md                   ← netplan, IP forwarding, DHCP, DNS, verificación
-│   ├── nftables.conf               ← reglas completas (deny-all + excepciones reales)
-│   ├── suricata/
-│   │   └── README.md               ← instalación, config, integración con Wazuh
-│   └── wireguard/
-│       └── README.md               ← server + cliente + verificación
+│   ├── README.md                     ← Este documento
+│   ├── config.md                     ← Guía completa de configuración
+│   ├── backups-automatizacion/
+│   │   ├── configs/
+│   │   │   ├── dhcp/                 ← Backup configuración DHCP
+│   │   │   ├── netplan/              ← Backup configuración de interfaces
+│   │   │   ├── nftables/             ← Backup reglas de firewall
+│   │   │   └── suricata/             ← Backup configuración IDS
+│   │   └── scripts/
+│   │       ├── 01-base.sh            ← Configuración base del sistema
+│   │       ├── 02-dhcp.sh            ← Automatización instalación DHCP
+│   │       ├── 03-dns.sh             ← Automatización instalación DNS
+│   │       ├── 04-nftables.sh        ← Automatización reglas firewall
+│   │       └── 05-suricata.sh        ← Automatización instalación Suricata
 │
-├── dmz/
-│   ├── README.md                   ← hosts, política de seguridad
-│   ├── Documentacio dmz-host1.md
-│   └── Documentacio dmz-host2.md
+├── wazuh/
+│   ├── README.md                     ← Overview, tabla de agentes, funcionalidades
+│   ├── config.md                     ← Instalación paso a paso (all-in-one + agentes)
+│   └── dashboard-screenshots/        ← Evidencias visuales del SOC funcionando
 │
-scripts/
-├── wazuh-healthcheck.sh            ← autorecuperación de servicios Wazuh (cron cada 5 min)
-└── wazuh-agents-status.sh          ← reporte del estado de agentes (cron cada hora)
+└── dmz/
+    ├── README.md                     ← Hosts, política de seguridad
+    ├── Documentacio dmz-host1.md     ← Servidor web (Nginx + PHP + Wazuh Agent)
+    └── Documentacio dmz-host2.md     ← Servidor de base de datos (MariaDB + Wazuh Agent)
 ```
 
 ---
