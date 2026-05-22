@@ -27,7 +27,6 @@
 - [Máquinas Virtuales](#️-máquinas-virtuales)
 - [Sprints y Weekly Logs](#-sprints--weekly-logs)
 - [Estructura del Repositorio](#-estructura-del-repositorio)
-- [Cómo empezar](#-cómo-empezar)
 - [Módulos ASIX cubiertos](#-módulos-asix-cubiertos)
 - [Autores](#-autores--grupo-5)
 
@@ -210,10 +209,6 @@ configs/
 ```
 
 ---
-
-## 🚀 Cómo Empezar
-
-> La guía completa paso a paso para configurar wazuh está en [ configs/wazuh/config.md ](configs/wazuh/config.md)
 
 ### Requisitos del host
 
