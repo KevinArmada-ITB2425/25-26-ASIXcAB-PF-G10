@@ -210,7 +210,7 @@ scripts/
 
 ## 🚀 Cómo Empezar
 
-> La guía completa paso a paso está en [ configs/wazuh/config.md ](configs/wazuh/config.md)
+> La guía completa paso a paso para configurar wazuh está en [ configs/wazuh/config.md ](configs/wazuh/config.md)
 
 ### Requisitos del host
 
@@ -235,7 +235,7 @@ SO del host:     Linux / Windows 10+
 # 9️⃣  Ejecutar pruebas de penetración y verificar alertas en el SOC
 ```
 
-Consulta la carpeta [`configs/`](configs/) para los archivos de configuración de cada servicio y [`scripts/`](scripts/) para las herramientas de automatización y monitorización.
+Consulta la carpeta [`configs/`](configs/) para los archivos de configuración de cada servicio y en cada configuracion se encuentran los scripts para las herramientas de automatización y monitorización.
 
 ---
 
