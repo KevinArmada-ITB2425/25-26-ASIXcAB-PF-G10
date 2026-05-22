@@ -114,7 +114,7 @@ Servidor **Wazuh** en la subred de Gestió. Agentes en todos los endpoints detec
 ```
 
 > 💡 La topología fue diseñada y validada en **Cisco Packet Tracer** antes de su implementación.  
-> 📂 Diagrama visual disponible en [`diagrams/`](diagrams/)
+> 📂 Diagrama visual disponible en [`diagrams/diagrama_final.webp`](diagrams/diagrama_final.webp)
 
 ---
 
